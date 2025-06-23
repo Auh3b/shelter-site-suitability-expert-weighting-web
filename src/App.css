@@ -1,0 +1,18 @@
+*,
+html {
+  font-family: 'Geist', sans-serif!;
+}
+
+.geist-normal {
+  font-family: 'Geist', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.geist-title {
+  font-family: 'Geist Mono', monospace;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
