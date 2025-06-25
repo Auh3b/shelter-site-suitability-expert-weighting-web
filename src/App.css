@@ -1,18 +1,30 @@
-*,
-html {
-  font-family: 'Geist', sans-serif!;
+html,
+body {
+  font-family: Geist, sans-serif!;
 }
 
 .geist-normal {
-  font-family: 'Geist', sans-serif;
+  font-family: Geist, sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
 .geist-title {
-  font-family: 'Geist Mono', monospace;
+  font-family: Geist Mono, monospace;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
+}
+
+.collection-table {
+  @apply table-auto border-collapse w-full;
+}
+
+.collection-head {
+  @apply border-b  align-top;
+}
+
+.collection-row {
+  @apply border-b align-top;
 }
