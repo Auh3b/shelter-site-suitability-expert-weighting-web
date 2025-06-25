@@ -1,3 +1,17 @@
+export interface Criteria {
+  [k: string]: Criterion;
+}
+
+export interface Criterion {
+  name: string;
+  citation: Citation;
+}
+
+interface Citation {
+  authors: string;
+  url?: string;
+}
+
 export const criteria: Criteria = {
   buildings: {
     name: 'Buidings',
@@ -23,19 +37,19 @@ export const criteria: Criteria = {
       authors: '',
     },
   },
-  Population: {
+  population: {
     name: 'Population',
     citation: {
       authors: '',
     },
   },
-  Roads: {
+  roads: {
     name: 'Roads',
     citation: {
       authors: '',
     },
   },
-  Slope: {
+  slope: {
     name: 'Slope',
     citation: {
       authors: '',
@@ -43,16 +57,39 @@ export const criteria: Criteria = {
   },
 };
 
-export interface Criteria {
-  [k: string]: Criterion;
+const criterionList = Object.keys(criteria);
+const endIx = criterionList.length - 1;
+
+export interface CriteriaTree {
+  [k: string]: CriterionNodes;
 }
 
-export interface Criterion {
-  name: string;
-  citation: Citation;
+export interface CriterionNodes {
+  [k: string]: CriteriaNode;
 }
 
-interface Citation {
-  authors: string;
-  url?: string;
+export interface CriteriaNode {
+  importancy: string;
+  scale: string | number;
 }
+
+export const criteriaSurveyTree: CriteriaTree = Object.entries(
+  criteria,
+).reduce<CriteriaTree>((prev, [criterion], ix) => {
+  if (ix === endIx) return prev;
+  prev[criterion] = criterionList
+    .slice(ix + 1)
+    .reduce<CriterionNodes>((set, currCriterion) => {
+      set[currCriterion] = {
+        importancy: '',
+        scale: 0,
+      };
+      return set;
+    }, {});
+  return prev;
+}, {});
+
+export const importancyValue: string[] = ['A', 'B'];
+export const intensityValue: number[] = Array(9)
+  .fill(0)
+  .map((_k, i) => i + 1);
