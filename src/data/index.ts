@@ -71,6 +71,7 @@ export interface CriterionNodes {
 export interface CriteriaNode {
   importancy: string;
   scale: string | number;
+  owner: 'Predefined' | 'User Defined';
 }
 
 export const criteriaSurveyTree: CriteriaTree = Object.entries(
@@ -83,6 +84,7 @@ export const criteriaSurveyTree: CriteriaTree = Object.entries(
       set[currCriterion] = {
         importancy: '',
         scale: 0,
+        owner: 'Predefined',
       };
       return set;
     }, {});

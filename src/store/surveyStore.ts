@@ -23,6 +23,31 @@ const surveyStore = createSlice({
       const { subject, value, comparand, type } = action.payload;
       state.criteriaQuestion[subject][comparand][type] = value;
     },
+    setCriterion: (state, action) => {
+      const criterion = action.payload;
+      const exisiting = Object.keys(state.criteriaQuestion);
+      const lastIx = exisiting.length - 1;
+      const lastCriterion = exisiting[lastIx];
+      const lastComparand = Object.keys(
+        state.criteriaQuestion[lastCriterion],
+      )[0];
+
+      for (let i = 0; i < exisiting.length; i++) {
+        const item = exisiting[i];
+        state.criteriaQuestion[item][criterion] = {
+          importancy: '',
+          scale: 0,
+          owner: 'User Defined',
+        };
+      }
+      state.criteriaQuestion[lastComparand] = {
+        [criterion]: {
+          importancy: '',
+          scale: 0,
+          owner: 'User Defined',
+        },
+      };
+    },
   },
 });
 
@@ -42,6 +67,11 @@ export const setCriteriaValue = (payload: {
 }) => ({
   payload,
   type: 'survey/setCriteriaValue',
+});
+
+export const setCriterion = (payload: string) => ({
+  payload,
+  type: 'survey/setCriterion',
 });
 
 export default surveyStore.reducer;

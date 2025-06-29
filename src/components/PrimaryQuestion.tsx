@@ -6,8 +6,16 @@ import {
 } from '@/data';
 import type { RootState } from '@/lib/types';
 import { setCriteriaValue } from '@/store/surveyStore';
-import { Fragment, useCallback, useMemo } from 'react';
+import {
+  Fragment,
+  memo,
+  useCallback,
+  useMemo,
+  type PropsWithChildren,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import AddCriterion from './AddCriterion';
+import { Badge } from './ui/badge';
 import {
   Select,
   SelectContent,
@@ -31,10 +39,11 @@ export default function PrimaryQuestion() {
     <Fragment>
       <div className='w-full  flex gap-4 capitalize font-medium'>
         <span className='w-32'>Subject</span>
-        <div className='grow grid grid-cols-3 gap-4'>
+        <div className='grow grid grid-cols-4 gap-4'>
           <span>Comparand</span>
           <span>Importancy</span>
           <span>Scale</span>
+          <span></span>
         </div>
       </div>
       {criteriaEntries.map(([crit, values]) => (
@@ -44,6 +53,9 @@ export default function PrimaryQuestion() {
           values={values}
         />
       ))}
+      <div className='w-full flex items-center justify-center my-8'>
+        <AddCriterion />
+      </div>
     </Fragment>
   );
 }
@@ -59,12 +71,13 @@ function CriteriaUI(props: { subject: string; values: CriterionNodes }) {
           <CriterionName criterion={subject} />
         </span>
         <div className='flex flex-col gap-4 grow'>
-          {comparands.map(([comparand], ix) => (
+          {comparands.map(([comparand, rest], ix) => (
             <ComparativeCriterion
               key={comparand}
               subject={subject}
               comparand={comparand}
               border={ix === comparands.length - 1 ? false : true}
+              {...rest}
             />
           ))}
         </div>
@@ -74,18 +87,22 @@ function CriteriaUI(props: { subject: string; values: CriterionNodes }) {
   );
 }
 
+const ImportancyScaleUI = memo(ImportancyScale);
+const IntensityScaleUI = memo(IntensityScale);
+
 function ComparativeCriterion(props: ScaleProps) {
   const { border = true } = props;
   return (
     <div
-      className={`grid grid-cols-3 gap-4 ${
+      className={`grid grid-cols-4 gap-4 ${
         border && 'border-b border-dashed'
       } pb-2`}>
       <span className='capitalize'>
         <CriterionName criterion={props.comparand} />
       </span>
-      <ImportancyScale {...props} />
-      <IntensityScale {...props} />
+      <ImportancyScaleUI {...props} />
+      <IntensityScaleUI {...props} />
+      <OwnerTag>{props.owner}</OwnerTag>
     </div>
   );
 }
@@ -94,6 +111,7 @@ interface ScaleProps {
   subject: string;
   comparand: string;
   border?: boolean;
+  owner?: string;
 }
 
 function ImportancyScale(props: ScaleProps) {
@@ -107,9 +125,7 @@ function ImportancyScale(props: ScaleProps) {
     [subject, comparand, type, dispatch],
   );
   return (
-    <Select
-      onOpenChange={(e) => console.log(e)}
-      onValueChange={handleChange}>
+    <Select onValueChange={handleChange}>
       <SelectTrigger className='w-[60px]'>
         <SelectValue placeholder='Scale' />
       </SelectTrigger>
@@ -131,7 +147,7 @@ function IntensityScale(props: ScaleProps) {
   const type = 'scale';
   const dispatch = useDispatch();
   const handleChange = useCallback(
-    async (value: string) => {
+    (value: string) => {
       dispatch(setCriteriaValue({ subject, comparand, type, value }));
     },
     [subject, comparand, type, dispatch],
@@ -154,7 +170,13 @@ function IntensityScale(props: ScaleProps) {
   );
 }
 
+function OwnerTag(props: PropsWithChildren) {
+  return <Badge variant={'secondary'}>{props.children}</Badge>;
+}
+
 function CriterionName(props: { criterion: string }) {
-  const { name } = criteria[props.criterion];
+  const name = criteria[props.criterion]
+    ? criteria[props.criterion].name
+    : props.criterion;
   return <span>{name}</span>;
 }
