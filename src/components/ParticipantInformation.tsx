@@ -6,12 +6,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Input } from './ui/input';
 
 const _participantInformation = [
-  { required: true, key: 'name', label: 'Name' },
-  { required: true, key: 'occupation', label: 'Occupation' },
-  { required: true, key: 'organisation', label: 'Organisation' },
-  { required: true, key: 'work_email', label: 'Work Email' },
-  { required: false, key: 'alternative_email', label: 'Alternative Email' },
-  { required: true, key: 'phone', label: 'phone' },
+  { placeholder: 'John Doe', required: true, key: 'name', label: 'Name' },
+  {
+    placeholder: 'Climate Change Specialist',
+    required: true,
+    key: 'occupation',
+    label: 'Occupation',
+  },
+  {
+    placeholder: 'Acme',
+    required: true,
+    key: 'organisation',
+    label: 'Organisation',
+  },
+  {
+    placeholder: 'johndoe@acme.com',
+    required: true,
+    key: 'work_email',
+    label: 'Work Email',
+  },
+  {
+    placeholder: 'johndoe@ggle.com',
+    required: false,
+    key: 'alternative_email',
+    label: 'Alternative Email',
+  },
+  {
+    placeholder: '265999900021',
+    required: true,
+    key: 'phone',
+    label: 'phone',
+  },
 ];
 
 export default function ParticipantInformation() {
@@ -36,10 +61,11 @@ interface InformationInputProps {
   keyName: string;
   label: string;
   required?: boolean;
+  placeholder?: string;
 }
 
 function InformationInput(props: InformationInputProps) {
-  const { keyName, label, required } = props;
+  const { keyName, label, required, placeholder } = props;
   const dispatch = useDispatch();
   const participant = useSelector(
     (state: RootState) => state.survey.participant,
@@ -65,6 +91,7 @@ function InformationInput(props: InformationInputProps) {
       <Input
         onChange={handleChange}
         value={value}
+        placeholder={placeholder}
       />
     </div>
   );
