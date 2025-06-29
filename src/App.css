@@ -16,15 +16,3 @@ body {
   font-weight: 700;
   font-style: normal;
 }
-
-.collection-table {
-  @apply table-auto border-collapse w-full;
-}
-
-.collection-head {
-  @apply border-b  align-top;
-}
-
-.collection-row {
-  @apply border-b align-top;
-}

@@ -122,3 +122,26 @@
 .section {
   @apply text-xl font-semibold;
 }
+
+.button {
+  @apply cursor-pointer;
+}
+
+.collection-table {
+  @apply border-collapse w-full text-sm;
+}
+
+.collection-head {
+  @apply border-b  align-top;
+}
+
+.collection-row {
+  @apply border-b align-top;
+}
+
+.collection-row th {
+  @apply text-left py-2 px-2;
+}
+.collection-row td {
+  @apply text-left py-2 px-2;
+}
