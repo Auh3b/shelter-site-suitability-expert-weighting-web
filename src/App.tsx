@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Introduction from './components/Introduction';
 import ParticipantInformation from './components/ParticipantInformation';
 import PrimaryQuestion from './components/PrimaryQuestion';
+import PrimaryQuestionInstructionModal from './components/PrimaryQuestionInstructionModal';
 
 function App() {
   return (
@@ -13,7 +14,15 @@ function App() {
       <ParticipantInformation />
       <h5 className='section mt-8'>Questions</h5>
       <div className='my-4'>
-        <p>Please rank the following criteria in order most significance.</p>
+        <p>
+          Please rank the following criteria in order most significance (see{' '}
+          <PrimaryQuestionInstructionModal>
+            <span className='italic underline decoration-dotted button font-medium'>
+              instructions
+            </span>
+          </PrimaryQuestionInstructionModal>
+          ).
+        </p>
       </div>
       <PrimaryQuestion />
       <Footer />
