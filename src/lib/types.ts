@@ -5,7 +5,10 @@ export interface RootState {
   page: PageState;
 }
 
-export interface PageState {}
+export interface PageState {
+  consentFormOpen: boolean;
+  consentGiven: boolean;
+}
 
 export interface SurveyState {
   participant: Participant;
