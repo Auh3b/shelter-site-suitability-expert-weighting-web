@@ -6,6 +6,7 @@ import {
 } from '@/data';
 import type { RootState } from '@/lib/types';
 import { setCriteriaValue } from '@/store/surveyStore';
+import { Info } from 'lucide-react';
 import {
   Fragment,
   memo,
@@ -16,6 +17,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import AddCriterion from './AddCriterion';
 import { Badge } from './ui/badge';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import {
   Select,
   SelectContent,
@@ -127,7 +129,7 @@ function ImportancyScale(props: ScaleProps) {
   return (
     <Select onValueChange={handleChange}>
       <SelectTrigger className='w-[60px]'>
-        <SelectValue placeholder='Scale' />
+        <SelectValue placeholder='A/B' />
       </SelectTrigger>
       <SelectContent>
         {importancyValue.map((d) => (
@@ -155,7 +157,7 @@ function IntensityScale(props: ScaleProps) {
   return (
     <Select onValueChange={handleChange}>
       <SelectTrigger className='w-[60px]'>
-        <SelectValue placeholder='Scale' />
+        <SelectValue placeholder='0' />
       </SelectTrigger>
       <SelectContent>
         {intensityValue.map((d) => (
@@ -170,6 +172,29 @@ function IntensityScale(props: ScaleProps) {
   );
 }
 
+function CitationPopover(props: { criterion?: string }) {
+  const { criterion } = props;
+  const citation = useMemo(() => {
+    if (!criterion || !criteria[criterion] || !criteria[criterion].citation)
+      return null;
+    return criteria[criterion].citation.authors;
+  }, []);
+  return (
+    <div className='self-start'>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Info
+            color='#525252'
+            size={12}
+            className='button'
+          />
+        </PopoverTrigger>
+        <PopoverContent side={'left'}>{citation}</PopoverContent>
+      </Popover>
+    </div>
+  );
+}
+
 function OwnerTag(props: PropsWithChildren) {
   return <Badge variant={'secondary'}>{props.children}</Badge>;
 }
@@ -178,5 +203,10 @@ function CriterionName(props: { criterion: string }) {
   const name = criteria[props.criterion]
     ? criteria[props.criterion].name
     : props.criterion;
-  return <span>{name}</span>;
+  return (
+    <span className='flex items-center gap-1'>
+      {name}
+      <CitationPopover {...props} />
+    </span>
+  );
 }

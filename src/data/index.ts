@@ -4,12 +4,13 @@ export interface Criteria {
 
 export interface Criterion {
   name: string;
-  citation: Citation;
+  citation?: Citation;
 }
 
 interface Citation {
   authors: string;
   url?: string;
+  description?: string;
 }
 
 export const criteria: Criteria = {
