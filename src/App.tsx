@@ -2,9 +2,11 @@ import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Introduction from './components/Introduction';
+import ParticipantConsent from './components/ParticipantConsent';
 import ParticipantInformation from './components/ParticipantInformation';
 import PrimaryQuestion from './components/PrimaryQuestion';
 import PrimaryQuestionInstructionModal from './components/PrimaryQuestionInstructionModal';
+import SubmitForm from './components/SubmitForm';
 
 function App() {
   return (
@@ -17,14 +19,17 @@ function App() {
         <p>
           Please rank the following criteria in order most significance (see{' '}
           <PrimaryQuestionInstructionModal>
-            <span className='italic underline decoration-dotted button font-medium'>
+            <span className='button underline button font-medium'>
               instructions
             </span>
           </PrimaryQuestionInstructionModal>
           ).
         </p>
       </div>
+
       <PrimaryQuestion />
+      <ParticipantConsent />
+      <SubmitForm />
       <Footer />
     </div>
   );
