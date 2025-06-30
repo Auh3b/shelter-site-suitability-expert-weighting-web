@@ -7,6 +7,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -43,6 +44,9 @@ export default function ParticipantConsent() {
           <DialogTitle className='geist-title'>
             Participant Information Sheet
           </DialogTitle>
+          <DialogDescription>
+            Informamation and conset form for the participant
+          </DialogDescription>
         </DialogHeader>
         <ParticipantConsentContent />
         <div className='flex items-start gap-2 text-sm geist-normal'>
