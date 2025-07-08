@@ -57,7 +57,7 @@ export const criteriaSurveyTree: CriteriaTree = Object.entries(
     .reduce<CriterionNodes>((set, currCriterion) => {
       set[currCriterion] = {
         importancy: '',
-        scale: 0,
+        scale: '0',
         owner: 'Predefined',
       };
       return set;

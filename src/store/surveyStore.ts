@@ -17,7 +17,19 @@ const surveyStore = createSlice({
   reducers: {
     setParticipantValue: (state, action) => {
       const { keyName, value } = action.payload;
-      state.participant[keyName] = value;
+      if (
+        [
+          'name',
+          'work_email',
+          'alternative_email',
+          'occupation',
+          'organisation',
+          'phone',
+        ].includes(keyName)
+      ) {
+        //@ts-expect-error keyname is varies
+        state.participant[keyName] = value;
+      }
     },
     setCriteriaValue: (state, action) => {
       const { subject, value, comparand, type } = action.payload;
