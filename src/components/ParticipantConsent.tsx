@@ -45,7 +45,7 @@ export default function ParticipantConsent() {
             Participant Information Sheet
           </DialogTitle>
           <DialogDescription>
-            Informamation and conset form for the participant
+            Information and conset form for the participant
           </DialogDescription>
         </DialogHeader>
         <ParticipantConsentContent />

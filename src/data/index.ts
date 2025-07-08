@@ -1,17 +1,4 @@
-export interface Criteria {
-  [k: string]: Criterion;
-}
-
-export interface Criterion {
-  name: string;
-  citation?: Citation;
-}
-
-interface Citation {
-  authors: string;
-  url?: string;
-  description?: string;
-}
+import type { Criteria, CriteriaTree, CriterionNodes } from '@/lib/types';
 
 export const criteria: Criteria = {
   buildings: {
@@ -60,20 +47,6 @@ export const criteria: Criteria = {
 
 const criterionList = Object.keys(criteria);
 const endIx = criterionList.length - 1;
-
-export interface CriteriaTree {
-  [k: string]: CriterionNodes;
-}
-
-export interface CriterionNodes {
-  [k: string]: CriteriaNode;
-}
-
-export interface CriteriaNode {
-  importancy: string;
-  scale: string | number;
-  owner: 'Predefined' | 'User Defined';
-}
 
 export const criteriaSurveyTree: CriteriaTree = Object.entries(
   criteria,

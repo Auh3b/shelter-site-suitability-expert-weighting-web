@@ -71,6 +71,7 @@ function InformationInput(props: InformationInputProps) {
     (state: RootState) => state.survey.participant,
   );
   const value = useMemo(
+    // @ts-ignore
     () => participant[keyName] || '',
     [participant, keyName],
   );

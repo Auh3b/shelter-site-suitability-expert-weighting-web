@@ -1,10 +1,5 @@
-import {
-  criteria,
-  importancyValue,
-  intensityValue,
-  type CriterionNodes,
-} from '@/data';
-import type { RootState } from '@/lib/types';
+import { criteria, importancyValue, intensityValue } from '@/data';
+import type { CriterionNodes, RootState } from '@/lib/types';
 import { setCriteriaValue } from '@/store/surveyStore';
 import { Info } from 'lucide-react';
 import {
@@ -29,7 +24,7 @@ import { Separator } from './ui/separator';
 
 export default function PrimaryQuestion() {
   const criteriaTree = useSelector(
-    (state: RootState) => state.survey.criteriaQuestion,
+    (state: RootState) => state.survey.criteriaRanking,
   );
 
   const criteriaEntries = useMemo(
@@ -43,7 +38,7 @@ export default function PrimaryQuestion() {
         <span className='w-32'>Subject</span>
         <div className='grow grid grid-cols-4 gap-4'>
           <span>Comparand</span>
-          <span>Importancy</span>
+          <span>Significancy</span>
           <span>Scale</span>
           <span></span>
         </div>
@@ -120,14 +115,21 @@ function ImportancyScale(props: ScaleProps) {
   const { subject, comparand } = props;
   const type = 'importancy';
   const dispatch = useDispatch();
+  const _value = useSelector(
+    (state: RootState) => state.survey.criteriaRanking,
+  );
+  const value = useMemo(() => _value[subject][comparand].importancy, [_value]);
   const handleChange = useCallback(
     async (value: string) => {
       dispatch(setCriteriaValue({ subject, comparand, type, value }));
     },
     [subject, comparand, type, dispatch],
   );
+
   return (
-    <Select onValueChange={handleChange}>
+    <Select
+      value={value}
+      onValueChange={handleChange}>
       <SelectTrigger className='w-[60px]'>
         <SelectValue placeholder='A/B' />
       </SelectTrigger>
@@ -148,6 +150,10 @@ function IntensityScale(props: ScaleProps) {
   const { subject, comparand } = props;
   const type = 'scale';
   const dispatch = useDispatch();
+  const _value = useSelector(
+    (state: RootState) => state.survey.criteriaRanking,
+  );
+  const value = useMemo(() => _value[subject][comparand].scale, [_value]);
   const handleChange = useCallback(
     (value: string) => {
       dispatch(setCriteriaValue({ subject, comparand, type, value }));
@@ -155,7 +161,9 @@ function IntensityScale(props: ScaleProps) {
     [subject, comparand, type, dispatch],
   );
   return (
-    <Select onValueChange={handleChange}>
+    <Select
+      value={value}
+      onValueChange={handleChange}>
       <SelectTrigger className='w-[60px]'>
         <SelectValue placeholder='0' />
       </SelectTrigger>

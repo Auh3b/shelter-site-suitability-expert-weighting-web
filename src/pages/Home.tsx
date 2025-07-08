@@ -1,4 +1,4 @@
-import Header from '@/components/Header';
+import InputErrors from '@/components/InputErrors';
 import Introduction from '@/components/Introduction';
 import ParticipantConsent from '@/components/ParticipantConsent';
 import ParticipantInformation from '@/components/ParticipantInformation';
@@ -12,10 +12,10 @@ export default function Home() {
     <div>
       {' '}
       <div className='px-8 lg:px-16 w-full lg:w-1/2 mx-auto geist-normal'>
-        <Header />
+        {/* <Header /> */}
         <Introduction />
         <ParticipantInformation />
-        <h5 className='section mt-8'>Questions</h5>
+        <h5 className='section mt-8'>Criteria Ranking</h5>
         <div className='my-4'>
           <p>
             Please rank the following criteria in order most significance (see{' '}
@@ -29,6 +29,7 @@ export default function Home() {
         </div>
 
         <PrimaryQuestion />
+        <InputErrors />
         <ParticipantConsent />
         <SubmitForm />
         <Footer />
