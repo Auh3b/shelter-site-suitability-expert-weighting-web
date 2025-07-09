@@ -19,6 +19,9 @@ const pageStore = createSlice({
     setErrors: (state, action) => {
       state.errors = action.payload;
     },
+    resetErrors: (state) => {
+      state.errors = undefined;
+    },
   },
 });
 
@@ -35,5 +38,7 @@ export const setErrors = (payload: {}) => ({
   payload,
   type: "page/setErrors",
 });
+
+export const resetErrors = () => ({ type: "page/resetErrors" });
 
 export default pageStore.reducer;
