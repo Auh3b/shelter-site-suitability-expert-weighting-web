@@ -5,6 +5,7 @@ const initialState = {
   consentGiven: false,
   formSubmitted: false,
   submittedTries: 0,
+  presetId: undefined,
   errors: undefined,
 };
 
@@ -26,6 +27,9 @@ const pageStore = createSlice({
     },
     setRetry: (state) => {
       state.submittedTries += 1;
+    },
+    setPresetId: (state, action) => {
+      state.presetId = action.payload;
     },
     resetErrors: (state) => {
       state.errors = undefined;
@@ -52,5 +56,10 @@ export const resetErrors = () => ({ type: "page/resetErrors" });
 export const setFormSubmitted = () => ({ type: "page/setFormSubmitted" });
 export const setRetry = () => ({ type: "page/setRetry" });
 export const resetPageState = () => ({ type: "page/resetPageState" });
+
+export const setPresetId = (payload: string) => ({
+  payload,
+  type: "page/setPresetId",
+});
 
 export default pageStore.reducer;

@@ -44,6 +44,7 @@ export const PageStateSchema = z.object({
   consentGiven: z.boolean(),
   formSubmitted: z.boolean(),
   submittedTries: z.number(),
+  presetId: z.string().optional(),
 });
 
 export const SurveyStateSchema = z.object({
