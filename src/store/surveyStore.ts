@@ -1,16 +1,16 @@
-import { criteriaSurveyTree } from '@/data';
-import { createSlice } from '@reduxjs/toolkit';
+import { criteriaSurveyTree } from "@/data";
+import { createSlice } from "@reduxjs/toolkit";
 
 const surveyStore = createSlice({
-  name: 'survey',
+  name: "survey",
   initialState: {
     participant: {
-      name: '',
-      work_email: '',
-      alternative_email: '',
-      occupation: '',
-      organisation: '',
-      phone: '',
+      name: "",
+      work_email: "",
+      alternative_email: "",
+      occupation: "",
+      organisation: "",
+      phone: "",
     },
     criteriaRanking: JSON.parse(JSON.stringify(criteriaSurveyTree)),
   },
@@ -19,12 +19,12 @@ const surveyStore = createSlice({
       const { keyName, value } = action.payload;
       if (
         [
-          'name',
-          'work_email',
-          'alternative_email',
-          'occupation',
-          'organisation',
-          'phone',
+          "name",
+          "work_email",
+          "alternative_email",
+          "occupation",
+          "organisation",
+          "phone",
         ].includes(keyName)
       ) {
         //@ts-expect-error keyname is varies
@@ -41,22 +41,22 @@ const surveyStore = createSlice({
       const lastIx = exisiting.length - 1;
       const lastCriterion = exisiting[lastIx];
       const lastComparand = Object.keys(
-        state.criteriaRanking[lastCriterion],
+        state.criteriaRanking[lastCriterion]
       )[0];
 
       for (let i = 0; i < exisiting.length; i++) {
         const item = exisiting[i];
         state.criteriaRanking[item][criterion] = {
-          importancy: '',
+          importancy: "",
           scale: 0,
-          owner: 'User Defined',
+          owner: "User Defined",
         };
       }
       state.criteriaRanking[lastComparand] = {
         [criterion]: {
-          importancy: '',
+          importancy: "",
           scale: 0,
-          owner: 'User Defined',
+          owner: "User Defined",
         },
       };
     },
@@ -68,7 +68,7 @@ export const setParticipantValue = (payload: {
   value: string | number;
 }) => ({
   payload,
-  type: 'survey/setParticipantValue',
+  type: "survey/setParticipantValue",
 });
 
 export const setCriteriaValue = (payload: {
@@ -78,12 +78,12 @@ export const setCriteriaValue = (payload: {
   value: string | number;
 }) => ({
   payload,
-  type: 'survey/setCriteriaValue',
+  type: "survey/setCriteriaValue",
 });
 
 export const setCriterion = (payload: string) => ({
   payload,
-  type: 'survey/setCriterion',
+  type: "survey/setCriterion",
 });
 
 export default surveyStore.reducer;

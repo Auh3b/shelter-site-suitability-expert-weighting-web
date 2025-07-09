@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   consentFormOpen: true,
@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const pageStore = createSlice({
-  name: 'page',
+  name: "page",
   initialState,
   reducers: {
     setConsentFormOpen: (state, action) => {
@@ -24,16 +24,16 @@ const pageStore = createSlice({
 
 export const setConsentFormOpen = (payload: boolean) => ({
   payload,
-  type: 'page/setConsentFormOpen',
+  type: "page/setConsentFormOpen",
 });
 export const setConsentGiven = (payload: boolean) => ({
   payload,
-  type: 'page/setConsentGiven',
+  type: "page/setConsentGiven",
 });
 
 export const setErrors = (payload: {}) => ({
   payload,
-  type: 'page/setErrors',
+  type: "page/setErrors",
 });
 
 export default pageStore.reducer;

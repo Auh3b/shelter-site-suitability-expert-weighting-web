@@ -1,8 +1,8 @@
-import type { RootState } from '@/lib/types';
-import { setConsentFormOpen, setConsentGiven } from '@/store/pageStore';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button } from './ui/button';
-import { Checkbox } from './ui/checkbox';
+import type { RootState } from "@/lib/types";
+import { setConsentFormOpen, setConsentGiven } from "@/store/pageStore";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "./ui/button";
+import { Checkbox } from "./ui/checkbox";
 import {
   Dialog,
   DialogClose,
@@ -12,40 +12,36 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from './ui/dialog';
+} from "./ui/dialog";
 
 export default function ParticipantConsent() {
   const { consentFormOpen, consentGiven } = useSelector(
-    (state: RootState) => state.page,
+    (state: RootState) => state.page
   );
   const dispatch = useDispatch();
   const handleClose = () => dispatch(setConsentFormOpen(false));
   const handleToggle = (value: boolean) => dispatch(setConsentFormOpen(value));
   const handleCheck = (value: boolean) => dispatch(setConsentGiven(value));
   return (
-    <Dialog
-      open={consentFormOpen}
-      onOpenChange={handleToggle}>
+    <Dialog open={consentFormOpen} onOpenChange={handleToggle}>
       <div className='flex items-center gap-4'>
-        <Checkbox
-          disabled
-          checked={consentGiven}
-        />
+        <Checkbox disabled checked={consentGiven} />
         <p>
-          I have read and fully understand the{' '}
+          I have read and fully understand the{" "}
           <DialogTrigger asChild>
             <span className='button  underline font-medium'>consent form</span>
-          </DialogTrigger>{' '}
+          </DialogTrigger>{" "}
           *
         </p>
       </div>
       <DialogContent className='h-3/4 '>
         <DialogHeader>
           <DialogTitle className='geist-title'>
-            Participant Information Sheet
+            Participant Consent Form
           </DialogTitle>
-          <DialogDescription>
-            Information and conset form for the participant
+          <DialogDescription hidden>
+            This provides essential information and consent form for the
+            participant
           </DialogDescription>
         </DialogHeader>
         <ParticipantConsentContent />

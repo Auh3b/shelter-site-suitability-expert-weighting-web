@@ -1,4 +1,4 @@
-import { z, type ZodIssue } from 'zod';
+import { z, type ZodIssue } from "zod";
 
 export const CitationSchema = z.object({
   authors: z.string(),
@@ -14,13 +14,13 @@ export const CriterionSchema = z.object({
 export const CriteriaSchema = z.record(z.string(), CriterionSchema);
 
 export const CriterionNodeSchema = z.object({
-  importancy: z.enum(['A', 'B', ''], {
-    message: 'The expected value is either A or B.',
+  importancy: z.enum(["A", "B"], {
+    message: "The expected value is either A or B.",
   }),
-  scale: z.enum(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], {
-    message: 'Expected a value between 1 and 9',
+  scale: z.enum(["1", "2", "3", "4", "5", "6", "7", "8", "9"], {
+    message: "Expected a value between 1 and 9",
   }),
-  owner: z.enum(['Predefined', 'User Defined']).optional(),
+  owner: z.enum(["Predefined", "User Defined"]).optional(),
 });
 
 export const CriterionNodesSchema = z.record(z.string(), CriterionNodeSchema);
@@ -36,7 +36,7 @@ export const ParticipantSchema = z.object({
   phone: z
     .string()
     .min(7)
-    .regex(/^\d*$/gm, { message: 'Should be made up of only numbers.' }),
+    .regex(/^\d*$/gm, { message: "Should be made up of only numbers." }),
 });
 
 export const PageStateSchema = z.object({
