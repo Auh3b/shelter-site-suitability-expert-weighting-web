@@ -1,73 +1,44 @@
-import type { Criteria, CriteriaTree, CriterionNodes } from "@/lib/types";
+import type {
+  CriteriaTree,
+  CriterionNodes,
+  CriterionSupabase,
+} from '@/lib/types';
 
-export const criteria: Criteria = {
-  buildings: {
-    name: "Buidings",
-    citation: {
-      authors: "",
+export const generateCriteriaSurveyTree = (
+  input: CriterionSupabase[],
+): CriteriaTree => {
+  const criterionList = input.map(({ name }) => name);
+  const endIx = criterionList.length - 1;
+  const output = input.reduce<{ [key: string]: CriterionNodes }>(
+    (prev, { name }, ix) => {
+      if (ix === endIx) return prev;
+      prev[name] = criterionList
+        .slice(ix + 1)
+        .reduce<CriterionNodes>((set, currCriterion) => {
+          set[currCriterion] = {
+            // @ts-expect-error defaults is invalid
+            importancy: '',
+            // @ts-expect-error defaults is invalid
+            scale: '0',
+            owner: 'Predefined',
+          };
+          return set;
+        }, {});
+      return prev;
     },
-  },
-  elevation: {
-    name: "Elevation",
-    citation: {
-      authors: "",
-    },
-  },
-  floodData: {
-    name: "Flood Data",
-    citation: {
-      authors: "",
-    },
-  },
-  landUse: {
-    name: "Land Use",
-    citation: {
-      authors: "",
-    },
-  },
-  population: {
-    name: "Population",
-    citation: {
-      authors: "",
-    },
-  },
-  roads: {
-    name: "Roads",
-    citation: {
-      authors: "",
-    },
-  },
-  slope: {
-    name: "Slope",
-    citation: {
-      authors: "",
-    },
-  },
+    {},
+  );
+  return output;
 };
 
-const criterionList = Object.keys(criteria);
-const endIx = criterionList.length - 1;
+export const generateCriteriaLookup = (input: CriterionSupabase[]) => {
+  return input.reduce<{ [key: string]: CriterionSupabase }>((prev, curr) => {
+    prev[curr.name] = curr;
+    return prev;
+  }, {});
+};
 
-export const criteriaSurveyTree: CriteriaTree = Object.entries(
-  criteria
-).reduce<CriteriaTree>((prev, [criterion], ix) => {
-  if (ix === endIx) return prev;
-  prev[criterion] = criterionList
-    .slice(ix + 1)
-    .reduce<CriterionNodes>((set, currCriterion) => {
-      set[currCriterion] = {
-        // @ts-expect-error defaults is invalid
-        importancy: "",
-        // @ts-expect-error defaults is invalid
-        scale: "0",
-        owner: "Predefined",
-      };
-      return set;
-    }, {});
-  return prev;
-}, {});
-
-export const importancyValue: string[] = ["A", "B"];
+export const importancyValue: string[] = ['A', 'B'];
 export const intensityValue: number[] = Array(9)
   .fill(0)
   .map((_k, i) => i + 1);

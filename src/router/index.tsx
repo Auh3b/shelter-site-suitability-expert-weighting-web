@@ -1,11 +1,12 @@
-import criteriaLoader from "@/loader/criteriaLoader";
-import Home from "@/pages/Home";
-import SuccessfulPage from "@/pages/SuccessfulPage";
-import { createBrowserRouter, type RouteObject } from "react-router-dom";
+import criteriaLoader from '@/loader/criteriaLoader';
+import { lazy } from 'react';
+import { createBrowserRouter, type RouteObject } from 'react-router-dom';
 
+const Home = lazy(() => import('@/pages/Home'));
+const SuccessfulPage = lazy(() => import('@/pages/SuccessfulPage'));
 export const ROUTE_NAMES = {
-  HOME: "/",
-  SUCCESS: "successful-submission",
+  HOME: '/',
+  SUCCESS: 'successful-submission',
 };
 
 const routes: RouteObject[] = [
