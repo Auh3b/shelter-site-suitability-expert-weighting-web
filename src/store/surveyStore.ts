@@ -1,19 +1,21 @@
 import { criteriaSurveyTree } from "@/data";
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  participant: {
+    name: "",
+    work_email: "",
+    alternative_email: "",
+    occupation: "",
+    organisation: "",
+    phone: "",
+  },
+  criteriaRanking: JSON.parse(JSON.stringify(criteriaSurveyTree)),
+};
+
 const surveyStore = createSlice({
   name: "survey",
-  initialState: {
-    participant: {
-      name: "",
-      work_email: "",
-      alternative_email: "",
-      occupation: "",
-      organisation: "",
-      phone: "",
-    },
-    criteriaRanking: JSON.parse(JSON.stringify(criteriaSurveyTree)),
-  },
+  initialState,
   reducers: {
     setParticipantValue: (state, action) => {
       const { keyName, value } = action.payload;
@@ -60,6 +62,7 @@ const surveyStore = createSlice({
         },
       };
     },
+    resetSurveyState: () => initialState,
   },
 });
 
@@ -85,5 +88,7 @@ export const setCriterion = (payload: string) => ({
   payload,
   type: "survey/setCriterion",
 });
+
+export const resetSurveyState = () => ({ type: "survey/resetSurveyState" });
 
 export default surveyStore.reducer;

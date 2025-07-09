@@ -42,6 +42,8 @@ export const ParticipantSchema = z.object({
 export const PageStateSchema = z.object({
   consentFormOpen: z.boolean(),
   consentGiven: z.boolean(),
+  formSubmitted: z.boolean(),
+  submittedTries: z.number(),
 });
 
 export const SurveyStateSchema = z.object({

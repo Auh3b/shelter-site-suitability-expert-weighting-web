@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   consentFormOpen: true,
   consentGiven: false,
+  formSubmitted: false,
+  submittedTries: 0,
   errors: undefined,
 };
 
@@ -19,9 +21,16 @@ const pageStore = createSlice({
     setErrors: (state, action) => {
       state.errors = action.payload;
     },
+    setFormSubmitted: (state) => {
+      state.formSubmitted = true;
+    },
+    setRetry: (state) => {
+      state.submittedTries += 1;
+    },
     resetErrors: (state) => {
       state.errors = undefined;
     },
+    resetPageState: () => initialState,
   },
 });
 
@@ -40,5 +49,8 @@ export const setErrors = (payload: {}) => ({
 });
 
 export const resetErrors = () => ({ type: "page/resetErrors" });
+export const setFormSubmitted = () => ({ type: "page/setFormSubmitted" });
+export const setRetry = () => ({ type: "page/setRetry" });
+export const resetPageState = () => ({ type: "page/resetPageState" });
 
 export default pageStore.reducer;
