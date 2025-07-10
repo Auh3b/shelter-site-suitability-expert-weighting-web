@@ -1,5 +1,6 @@
+import PageLoading from '@/components/PageLoading';
 import criteriaLoader from '@/loader/criteriaLoader';
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, type RouteObject } from 'react-router-dom';
 
 const Home = lazy(() => import('@/pages/Home'));
@@ -10,7 +11,15 @@ export const ROUTE_NAMES = {
 };
 
 const routes: RouteObject[] = [
-  { path: ROUTE_NAMES.HOME, element: <Home />, loader: criteriaLoader },
+  {
+    path: ROUTE_NAMES.HOME,
+    element: (
+      <Suspense fallback={<PageLoading />}>
+        <Home />
+      </Suspense>
+    ),
+    loader: criteriaLoader,
+  },
   {
     path: ROUTE_NAMES.SUCCESS,
     element: <SuccessfulPage />,
