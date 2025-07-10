@@ -57,12 +57,12 @@ export default function PrimaryQuestion() {
     <Fragment>
       {criteriaEntries ? (
         <div>
-          <div className='w-full  flex gap-4 capitalize font-medium text-sm'>
-            <span className='w-44'>Subject</span>
-            <div className='grow grid grid-cols-3 gap-4'>
-              <span>Comparand</span>
-              <span>Significancy</span>
-              <span>Scale</span>
+          <div className='w-full grid grid-cols-2 md:grid-cols-none md:flex gap-4 capitalize font-medium text-sm'>
+            <span className='md:w-44'>Subject</span>
+            <div className='flex justify-between gap-8'>
+              <span className='md:w-48'>Comparand</span>
+              <span className='hidden md:block'>Significancy</span>
+              <span className='hidden md:block'>Scale</span>
               <span></span>
             </div>
           </div>
@@ -90,8 +90,8 @@ function CriteriaUI(props: { subject: string; values: CriterionNodes }) {
 
   return (
     <Fragment>
-      <div className='flex gap-4 my-4'>
-        <span className='w-44'>
+      <div className='grid grid-cols-2 md:grid-cols-none md:flex gap-4 my-4'>
+        <span className='md:w-44'>
           <CriterionName criterion={subject} />
         </span>
         <div className='flex flex-col gap-4'>
@@ -118,10 +118,10 @@ function ComparativeCriterion(props: ScaleProps) {
   const { border = true } = props;
   return (
     <div
-      className={`flex justify-between gap-8 ${
+      className={`flex flex-col gap-2 md:flex-row justify-between md:gap-8 ${
         border && 'border-b border-dashed'
       } pb-2`}>
-      <span className=' w-48'>
+      <span className='md:w-48'>
         <CriterionName criterion={props.comparand} />
       </span>
       <ImportancyScaleUI {...props} />
@@ -160,22 +160,25 @@ function ImportancyScale(props: ScaleProps) {
   );
 
   return (
-    <Select
-      value={value}
-      onValueChange={handleChange}>
-      <SelectTrigger className='w-[60px]'>
-        <SelectValue placeholder='A/B' />
-      </SelectTrigger>
-      <SelectContent>
-        {importancyValue.map((d) => (
-          <SelectItem
-            key={d}
-            value={d}>
-            {d}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <div className=''>
+      <span className=' md:hidden italic text-xs'>Significancy</span>
+      <Select
+        value={value}
+        onValueChange={handleChange}>
+        <SelectTrigger className='w-[60px]'>
+          <SelectValue placeholder='A/B' />
+        </SelectTrigger>
+        <SelectContent>
+          {importancyValue.map((d) => (
+            <SelectItem
+              key={d}
+              value={d}>
+              {d}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 }
 
@@ -197,22 +200,25 @@ function IntensityScale(props: ScaleProps) {
     [subject, comparand, dispatch],
   );
   return (
-    <Select
-      value={value}
-      onValueChange={handleChange}>
-      <SelectTrigger className='w-[60px]'>
-        <SelectValue placeholder='0' />
-      </SelectTrigger>
-      <SelectContent>
-        {intensityValue.map((d) => (
-          <SelectItem
-            key={d}
-            value={String(d)}>
-            {d}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <div>
+      <span className='md:hidden italic text-xs'>Scale</span>
+      <Select
+        value={value}
+        onValueChange={handleChange}>
+        <SelectTrigger className='w-[60px]'>
+          <SelectValue placeholder='0' />
+        </SelectTrigger>
+        <SelectContent>
+          {intensityValue.map((d) => (
+            <SelectItem
+              key={d}
+              value={String(d)}>
+              {d}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 }
 
@@ -237,7 +243,7 @@ function CitationPopover(props: { criterion?: string }) {
         </PopoverTrigger>
         <PopoverContent
           side={'right'}
-          className='text-xs'>
+          className='text-xs geist-normal'>
           {citation}
         </PopoverContent>
       </Popover>
