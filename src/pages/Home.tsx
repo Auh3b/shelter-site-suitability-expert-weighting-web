@@ -16,8 +16,13 @@ export default function Home() {
         <ParticipantInformation />
         <h5 className='section mt-8'>Criteria Ranking</h5>
         <div className='my-4'>
-          <p>
-            Please rank the following criteria in order most significance (see{' '}
+          <p className='text-sm text-muted-foreground'>
+            The form below contains a set of criteria for identifying suitable
+            sites for establishing shelters for flood victims. These criteria
+            are structured as pairs of subjects and comparands. Each comparand
+            must be compared against its corresponding subject to determine the
+            relative level of significance. For more information on the
+            Significance and Scale properties, (see{' '}
             <PrimaryQuestionInstructionModal>
               <span className='button underline button font-medium'>
                 instructions

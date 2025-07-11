@@ -18,8 +18,8 @@ export default function PrimaryQuestionInstructionModal(
         <DialogHeader>
           <DialogTitle>Instructions</DialogTitle>
           <DialogDescription className='text-xs'>
-            This instructions details how the ranking question can be attempted.
-            The are two properties that need to be filled by the participant:
+            This instructions details how the ranking exercise can be attempted.
+            Participants are required to provide input for two properties:
             Significancy and Scale Property
           </DialogDescription>
         </DialogHeader>
@@ -35,10 +35,9 @@ function ImportancyInstructions() {
     <div>
       <h6 className='  font-semibold'>Significancy Property</h6>
       <p className=''>
-        There are only two option for this property "A" or "B" with former means
-        the subject is the more significant while later means the comparand is
-        more significant. This is only important when the scale intensity of
-        more that 1 (see below).
+        There are only two options for this property: "A" or "B". Selecting "A"
+        means the subject is more significant. Selecting "B" means the comparand
+        is more significant.
       </p>
     </div>
   );
@@ -49,8 +48,9 @@ function ScaleInstructions() {
     <div>
       <h6 className=' font-semibold'>Scale Property</h6>
       <p className=''>
-        The table below details the possible values available for the the scale
-        property.
+        The table below outlines the possible values for the Scale property.
+        These values indicate the degree of difference in significance between
+        the two criteria being compared.
       </p>
       <table className='collection-table'>
         <caption className='caption-bottom italic text-xs'>
