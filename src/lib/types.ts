@@ -1,5 +1,9 @@
 import { z, type ZodIssue } from 'zod';
 
+export const ConsistencyRatioSchema = z
+  .number()
+  .max(0.1, 'Consistency Ratio showed be less than 0.1');
+
 export const CriterionSupabaseSchema = z.object({
   name: z.string(),
   label: z.string(),
@@ -69,6 +73,7 @@ export const SurveyStateSchema = z.object({
   participant: ParticipantSchema,
   criteriaRanking: CriteriaTreeSchema.optional(),
   criteriaLookup: CriteriaSupabaseSchema.optional(),
+  consistencyRatio: ConsistencyRatioSchema.optional(),
 });
 
 export const RootStateSchema = z.object({
@@ -86,6 +91,7 @@ export type CriteriaTree = z.infer<typeof CriteriaTreeSchema>;
 export type CriterionNodes = z.infer<typeof CriterionNodesSchema>;
 export type CriterionNode = z.infer<typeof CriterionNodeSchema>;
 export type Participant = z.infer<typeof ParticipantSchema>;
+export type ConsistencyRatio = z.infer<typeof ConsistencyRatioSchema>;
 export type PageState = z.infer<typeof PageStateSchema> & {
   errors: ZodIssue[] | null;
 };

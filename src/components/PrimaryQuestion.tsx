@@ -77,8 +77,9 @@ export default function PrimaryQuestion() {
       ) : (
         <LoadingCriteriaInput />
       )}
-      <div className='w-full flex items-center justify-center my-8'>
+      <div className='w-full flex flex-col items-center justify-center my-8'>
         <AddCriterion />
+        <ConsistencyRatio />
       </div>
     </Fragment>
   );
@@ -275,6 +276,24 @@ function LoadingCriteriaInput() {
         <LoaderIcon />
       </span>
       <span className='text-muted-foreground'>Loading criteria</span>
+    </div>
+  );
+}
+
+function ConsistencyRatio() {
+  const cr = useSelector((state: RootState) => state.survey.consistencyRatio);
+
+  return (
+    <div className='my-8'>
+      <div className='flex gap-4'>
+        <span>Consisteny Ratio: </span>
+        <span
+          className={`${
+            !cr ? 'text-gray-400' : cr > 0.1 ? 'text-red-800' : 'text-green-800'
+          }`}>
+          {cr ? cr : 'Not Set'}
+        </span>
+      </div>
     </div>
   );
 }

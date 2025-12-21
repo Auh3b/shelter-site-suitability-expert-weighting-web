@@ -1,4 +1,10 @@
-import type { CriteriaTree, Importancy, Scale, SurveyState } from '@/lib/types';
+import type {
+  ConsistencyRatio,
+  CriteriaTree,
+  Importancy,
+  Scale,
+  SurveyState,
+} from '@/lib/types';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -12,6 +18,7 @@ const initialState = {
   },
   criteriaRanking: undefined,
   criteriaLookup: undefined,
+  consistencyRatio: undefined,
 } as SurveyState;
 
 const surveyStore = createSlice({
@@ -80,6 +87,9 @@ const surveyStore = createSlice({
     setCriteriaLookup: (state, action) => {
       state.criteriaLookup = action.payload;
     },
+    setConsistencyRatio: (state, action) => {
+      state.consistencyRatio = action.payload;
+    },
     resetSurveyState: () => initialState,
   },
 });
@@ -118,6 +128,10 @@ export const setCriterionScale = (payload: {
 export const setCriterion = (payload: string) => ({
   payload,
   type: 'survey/setCriterion',
+});
+export const setConsistencyRatio = (payload: ConsistencyRatio) => ({
+  payload,
+  type: 'survey/setConsistencyRatio',
 });
 
 export const resetSurveyState = () => ({ type: 'survey/resetSurveyState' });
