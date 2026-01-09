@@ -8,10 +8,10 @@ export default function Introduction() {
       </h1>
       <div className='flex flex-col gap-4 text-sm'>
         <p>
-          I am a postgraduate student at the University of Zambia. I am
-          administering a questionnaire for my research, which aims to identify
-          suitable areas for establishing evacuation facilities for individuals
-          displaced by floods.
+          My name is Chikondi Ngaiyaye. I am a postgraduate student at the
+          University of Zambia. I am administering a questionnaire for my
+          research, which aims to identify suitable areas for establishing
+          evacuation facilities for individuals displaced by floods.
         </p>
         <p>
           You are kindly invited to voluntarily participate in a questionnaire,

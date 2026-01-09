@@ -284,8 +284,8 @@ function ConsistencyRatio() {
   const cr = useSelector((state: RootState) => state.survey.consistencyRatio);
 
   return (
-    <div className='my-8'>
-      <div className='flex gap-4'>
+    <div className='my-8 text-center'>
+      <div className='flex gap-4 justify-center'>
         <span>Consisteny Ratio: </span>
         <span
           className={`${
@@ -294,6 +294,11 @@ function ConsistencyRatio() {
           {cr ? cr : 'Not Set'}
         </span>
       </div>
+      {cr && cr > 0.1 ? (
+        <span className='mt-4 block italic'>
+          "Please revise the weighting of criteria to be consistent."
+        </span>
+      ) : null}
     </div>
   );
 }
